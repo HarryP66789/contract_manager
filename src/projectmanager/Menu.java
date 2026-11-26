@@ -16,6 +16,8 @@ import java.util.Set;
 public class Menu {
 
     private static Scanner SC = new Scanner(System.in);
+    private static Scanner SCL = new Scanner(System.in);
+    //this scanner is a seperate scanner to pick up the string for Internatinal calls.
 
     public static void loadMenu() {
         try {
@@ -54,14 +56,59 @@ public class Menu {
 
     public static void newContract() {
         Contract newClient = new Contract();
-        
+
         System.out.println("What is your full name?");
         String clientName = SC.nextLine();
         newClient.setClientName(clientName);
-        System.out.println("Your name is:" + clientName + " is this correct. 1 for Yes 2 for No");
+        System.out.println("Your name is: " + clientName + " is this correct. 1 for Yes 2 for No");
         int clientNameCorrect = SC.nextInt();
+        if (clientNameCorrect == 1) {
+            System.out.println("""
+                           What is your prefered contract length?
+                           1. 12 months
+                           2. 24 months
+                           3. 36 months
+                           """);
+        }
+        int contractLength = SC.nextInt();
+        newClient.setContractLength(contractLength);
+
+        if (contractLength == 1 || contractLength == 2 || contractLength == 3) {
+            System.out.println("""
+                               What is your prefered data bundle?
+                               1. Low
+                               2. Medium
+                               3. High
+                               4. Unlimited
+                               """);
+        }
+        int dataBundle = SC.nextInt();
+        newClient.setDataBundle(dataBundle);
+
+        if (dataBundle == 1 || dataBundle == 2 || dataBundle == 3 || dataBundle == 4) {
+            System.out.println("""
+                               Would you like to inculde internatinal calls?
+                               Y/N
+                               """);
+        }
         
-        if (clientNameCorrect != 1 || clientNameCorrect != 2) {
+        SC.nextLine();
+        
+        String internatinalCalls = SCL.nextLine();
+        newClient.setAllowInternatinalCalls(internatinalCalls);
+         
+        if (internatinalCalls == "Y" || internatinalCalls == "N") {
+            System.out.println("""
+                               What package size would you require?
+                               1. Low
+                               2. Medium
+                               3. High
+                               """);
+        }
+        int packageSize = SC.nextInt();
+        newClient.setPackageSize(packageSize);
+
+        /*if (clientNameCorrect != 1 || clientNameCorrect != 2) {
             System.out.println("Please enter either 1 or 2");
         } else if (clientNameCorrect == 1){
             System.out.println("""
@@ -73,10 +120,8 @@ public class Menu {
         int contractLength = SC.nextInt();
         newClient.setContractLength(contractLength);
         } else if (clientNameCorrect == 2){
-            // maybe loop it back to the begining "what is your name" prompt somehow or just copy and paste it in here
-        }
-            
-   }
+        }*/
+    }
 
     private static void summaryOfContracts() {
         System.out.println("Summary Of");
